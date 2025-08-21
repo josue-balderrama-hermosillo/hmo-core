@@ -91,6 +91,18 @@ h1,h2,h3,h4,h5,h6 { color: var(--text); font-weight: 700; }
 .ic-icon{ font-size:20px; background:#FEE5D2; color:#F97316; border-radius:8px; padding:4px 8px; }
 
 .roadmap-embed{ border: 1px solid var(--card-bdr); border-radius:16px; overflow:hidden; box-shadow: 0 8px 24px rgba(0,0,0,.06); background:#fff; }
+
+/* Footer */
+.ci-footer{
+  text-align:center;
+  color:#6B7280;
+  font-size:13px;
+  margin: 28px 0 24px 0;
+}
+.ci-footer .f-accent{
+  width: 80px; height: 4px; border-radius:999px; background: var(--primary);
+  margin: 0 auto 10px auto;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -535,3 +547,11 @@ if embed_url:
     """, unsafe_allow_html=True)
 else:
     st.info("Set `ROADMAP_IFRAME_URL` to embed a live app in the Roadmap section.")
+
+# ---------- FOOTER ----------
+st.markdown("""
+<div class="ci-footer">
+  <div class="f-accent"></div>
+  <div>Developed by <strong>Core Innovation</strong> — Grupo Hermosillo · 2025</div>
+</div>
+""", unsafe_allow_html=True)
