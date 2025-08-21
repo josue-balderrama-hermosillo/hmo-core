@@ -10,7 +10,6 @@ import yaml
 import pandas as pd
 import streamlit as st
 import qrcode
-import streamlit.components.v1 as components
 
 # ---------- PAGE CONFIG ----------
 st.set_page_config(page_title="Core Innovation Hub", page_icon="✨", layout="wide")
@@ -96,61 +95,6 @@ h1,h2,h3,h4,h5,h6 { color: var(--text); font-weight: 700; }
 """, unsafe_allow_html=True)
 
 # ---------- HELPERS ----------
-
-def inject_autoplay_js():
-    if st.session_state.get("_ci_autoplay_js"): 
-        return
-    components.html("""
-<!DOCTYPE html><html><head><meta charset='utf-8'></head><body>
-<script>
-(function(){
-  if (window.__ciAutoplayInjected) return; window.__ciAutoplayInjected = true;
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      const el = e.target;
-      const visible = e.isIntersecting && e.intersectionRatio > 0.25;
-
-      if (el.tagName === 'VIDEO') {
-        if (visible) { el.muted = true; (el.play && el.play().catch(()=>{})); }
-        else { el.pause && el.pause(); }
-      } else if (el.tagName === 'IFRAME') {
-        const type = el.dataset.io;  // 'yt' | 'drive' | 'frame'
-        if (type === 'yt') {
-          if (visible) {
-            if (!el.src) el.src = el.dataset.src;
-            try { el.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*'); } catch(e){}
-          } else {
-            try { el.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*'); } catch(e){}
-          }
-        } else if (type === 'drive') {
-          if (visible) {
-            if (!el.src) el.src = el.dataset.src;  // has autoplay=1&mute=1
-          } else if (el.dataset.reloadOnLeave === '1') {
-            el.removeAttribute('src'); // unload to stop audio
-          }
-        } else if (type === 'frame') {
-          if (visible && !el.src && el.dataset.src) el.src = el.dataset.src;
-        }
-      }
-    });
-  }, {threshold:[0.25, 0.6]});
-
-  function scan(){
-    document.querySelectorAll('video[data-autoplay]').forEach(v=>io.observe(v));
-    document.querySelectorAll('iframe[data-io]').forEach(f=>io.observe(f));
-  }
-  const mo = new MutationObserver(scan);
-  mo.observe(document.body, {subtree:true, childList:true});
-  window.addEventListener('load', scan);
-  setTimeout(scan, 500);
-})();
-</script>
-</body></html>
-""", height=0, scrolling=False)
-    st.session_state["_ci_autoplay_js"] = True
-
-inject_autoplay_js()
-
 def ensure_list(x):
     return x if isinstance(x, list) else ([] if x in (None, "", {}) else [x])
 
@@ -239,74 +183,48 @@ VID_EXT = (".mp4",".webm",".ogg")
 def _youtube_embed(url: str) -> str:
     try:
         u = urlparse(url)
-        vid = ""
         if "youtu.be" in u.netloc:
-            vid = u.path.strip("/")
+            vid = u.path.strip("/"); 
         else:
             qs = dict(parse_qsl(u.query)); vid = qs.get("v","")
-        # Autoplay requires mute; enablejsapi for play/pause via postMessage
-        return f"https://www.youtube.com/embed/{vid}?rel=0&playsinline=1&mute=1&enablejsapi=1&autoplay=1"
+        return f"https://www.youtube.com/embed/{vid}?rel=0"
     except Exception:
         return url
 
 def _gdrive_preview(url: str) -> str:
+    # Ensure /preview form for drive files
     try:
         u = urlparse(url)
         if "drive.google.com" not in u.netloc.lower(): return url
+        if "/preview" in u.path: return url
+        # /file/d/<id>/view -> /file/d/<id>/preview
         path = u.path.replace("/view", "/preview")
-        q = dict(parse_qsl(u.query))
-        q["autoplay"] = "1"
-        q["mute"] = "1"
-        return urlunparse(u._replace(path=path, query=urlencode(q)))
+        return urlunparse(u._replace(path=path))
     except Exception:
         return url
 
-
-def classify_media(url: str):
+def classify_media(url: str) -> Tuple[str, str]:
     """
-    Returns (kind, normalized_url, provider)
+    Returns (kind, normalized_url)
       kind in {"image","video","iframe"}
-      provider in {"yt","drive",""} when kind == "iframe"
     """
-    if not isinstance(url, str) or not url.strip():
-        return ("image","", "")
+    if not isinstance(url, str) or not url.strip(): return ("image","")
     u = url.strip()
     low = u.lower()
-
+    # Google Drive -> iframe preview
     if "drive.google.com" in low:
-        return ("iframe", _gdrive_preview(u), "drive")
+        return ("iframe", _gdrive_preview(u))
+    # YouTube
     if "youtube.com" in low or "youtu.be" in low:
-        return ("iframe", _youtube_embed(u), "yt")
+        return ("iframe", _youtube_embed(u))
+    # File extensions
+    if any(low.endswith(ext) for ext in VID_EXT): return ("video", u)
+    if any(low.endswith(ext) for ext in IMG_EXT): return ("image", u)
+    # Unknown -> image by default
+    return ("image", u)
 
-    if any(low.endswith(ext) for ext in VID_EXT): return ("video", u, "")
-    if any(low.endswith(ext) for ext in IMG_EXT): return ("image", u, "")
-
-    # Unknown iframe provider (lazy-load on view)
-    return ("iframe", u, "frame")
 # --- BULLETS + GALLERY RENDERER ---------------------------------------------
 def render_bullets_and_gallery(demo: Dict[str, Any]) -> str:
-    """
-    Render a 'bullets' demo with optional media gallery.
-
-    YAML shape:
-      demo:
-        type: bullets
-        layout: "2-columns" | "3-columns"   # default 3
-        items: [ "bullet 1", "bullet 2", ... ]
-        media:
-          - "https://.../image.jpg"         # image
-          - "https://.../clip.mp4"          # html5 video
-          - "https://drive.google.com/file/d/<id>/preview"  # Google Drive (iframe)
-          - "https://youtu.be/<id>"         # YouTube (iframe)
-          - { url: "https://...", caption: "Optional caption" }
-
-    Notes:
-      - Requires classify_media(url) -> (kind, normalized_url, provider)
-        where provider is "yt" | "drive" | "" (or "frame" for unknown).
-      - Works with the IntersectionObserver script injected elsewhere:
-        * <video data-autoplay> will play/pause on enter/leave.
-        * <iframe data-io='yt|drive|frame' data-src='...'> lazy-loads on enter.
-    """
     if not isinstance(demo, dict):
         return "<div style='padding:10px;border:1px dashed #E5E7EB;border-radius:12px;color:#64748B'>Demo not configured</div>"
 
@@ -314,17 +232,17 @@ def render_bullets_and_gallery(demo: Dict[str, Any]) -> str:
     layout = str(demo.get("layout") or "3-columns").lower().strip()
     media  = demo.get("media") or []
 
-    # --- Bullets (2 or 3 columns) ---
     cols = 2 if "2" in layout else 3
     grid_css = f"repeat({cols}, 1fr)"
+
+    # bullets
     bullets_html = ""
     if items:
         per_col = max(1, (len(items) + cols - 1) // cols)
         col_html = []
         for i in range(cols):
             chunk = items[i*per_col:(i+1)*per_col]
-            if not chunk:
-                continue
+            if not chunk: continue
             lis = "".join([f"<li>{html.escape(str(x))}</li>" for x in chunk])
             col_html.append(f"<ul style='margin:0;padding-left:20px'>{lis}</ul>")
         bullets_html = (
@@ -336,44 +254,32 @@ def render_bullets_and_gallery(demo: Dict[str, Any]) -> str:
             "</div></div>"
         )
 
-    # --- Media gallery ---
+    # gallery
     gallery_html = ""
     if media:
         tiles = []
         for m in media:
             if isinstance(m, dict):
-                url = str(m.get("url", "")).strip()
-                cap = str(m.get("caption", "")).strip()
+                url = str(m.get("url","")).strip(); cap = str(m.get("caption","")).strip()
+                kind, norm = classify_media(url)
             else:
-                url = str(m or "").strip()
-                cap = ""
-            if not url:
-                continue
-
-            kind, norm, provider = classify_media(url)
+                url = str(m or "").strip(); cap = ""; kind, norm = classify_media(url)
+            if not norm: continue
             esc = html.escape(norm)
             cap_html = f"<div style='margin-top:6px;color:#6B7280;font-size:12px;'>{html.escape(cap)}</div>" if cap else ""
-
             if kind == "video":
                 tiles.append(
                     "<div>"
-                    f"<video data-autoplay muted playsinline preload='metadata' controls "
-                    "style='width:100%;border-radius:10px;outline:none;'>"
-                    f"<source src='{esc}'></video>"
-                    f"{cap_html}</div>"
+                    f"<video controls playsinline style='width:100%;border-radius:10px;outline:none;'>"
+                    f"<source src='{esc}'></video>{cap_html}</div>"
                 )
             elif kind == "iframe":
-                data_io = provider or "frame"
-                reload_flag = "1" if data_io == "drive" else "0"
                 tiles.append(
                     "<div>"
-                    "<div style='position:relative;width:100%;padding-top:56.25%;border-radius:10px;overflow:hidden;'>"
-                    f"<iframe data-io='{data_io}' data-src='{esc}' src='' loading='lazy' "
-                    "allow='autoplay; encrypted-media; xr-spatial-tracking; fullscreen; clipboard-read; clipboard-write' "
-                    f"data-reload-on-leave='{reload_flag}' "
-                    "style='position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:10px;' allowfullscreen>"
-                    "</iframe></div>"
-                    f"{cap_html}</div>"
+                    f"<div style='position:relative;width:100%;padding-top:56.25%;border-radius:10px;overflow:hidden;'>"
+                    f"<iframe src='{esc}' loading='lazy' allow='autoplay; encrypted-media' "
+                    "style='position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:10px;'></iframe>"
+                    f"</div>{cap_html}</div>"
                 )
             else:  # image
                 tiles.append(
@@ -381,7 +287,6 @@ def render_bullets_and_gallery(demo: Dict[str, Any]) -> str:
                     f"<img src='{esc}' style='width:100%;border-radius:10px;display:block;'/>"
                     f"{cap_html}</div>"
                 )
-
         if tiles:
             gallery_html = (
                 "<div class='ci-gallery' style="
@@ -396,9 +301,8 @@ def render_bullets_and_gallery(demo: Dict[str, Any]) -> str:
     if not (items or media):
         return "<div style='padding:10px;border:1px dashed #E5E7EB;border-radius:12px;color:#64748B'>Demo not configured</div>"
 
-    # Minify to avoid Markdown treating it as code
-    return (bullets_html + gallery_html).replace("\n", "").replace("\r", "")
-
+    out = (bullets_html + gallery_html).replace("\n","").replace("\r","")
+    return out
 
 def media_tag(demo_type: str, demo_src: str, demo_dict: Dict[str, Any] = None) -> str:
     # bullets support
@@ -631,4 +535,3 @@ if embed_url:
     """, unsafe_allow_html=True)
 else:
     st.info("Set `ROADMAP_IFRAME_URL` to embed a live app in the Roadmap section.")
-
