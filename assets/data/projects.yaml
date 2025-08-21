@@ -1,0 +1,169 @@
+- title: ACC Views and Reviews per plan
+  category: Dashboards
+  status: Live
+  impact: Real‑time visibility across projects for execs and PMs.
+  badges: [live, QR]
+  kpis:
+    - { label: Adoption, value: "78%" }
+    - { label: Decision Lead Time, value: "-65%" }
+    - { label: Exec Satisfaction, value: "9.1/10" }
+  demo:
+    type: iframe
+    url: "https://hmo-core-acc-dashboard.streamlit.app/?embed=true"
+  links:
+    - { label: Open Dashboard, url: "https://hmo-core-acc-dashboard.streamlit.app/" }
+
+- title: ACC Template
+  category: Standarization
+  status: Live
+  impact: Standardized project setup reduces setup time from days to hours.
+  badges: [Standard, Scalable, live]
+  kpis:
+    - { label: Setup Time, value: "-70%" }
+    - { label: Consistency, value: "95%+" }
+    - { label: Training Hours Saved, value: "120+" }
+  demo:
+    type: iframe
+    url: "https://drive.google.com/file/d/1Ctp2jEFT_I46ywsMqKnQxg0-k7raFFZj/preview"
+  links:
+    - { label: ACC Project Video, url: "https://drive.google.com/file/d/1Ctp2jEFT_I46ywsMqKnQxg0-k7raFFZj/view?usp=drive_link" }
+
+# ⬆️ Moved up one position (now right after ACC Template)
+- title: Sheets Automation
+  category: Automation
+  status: In Progress
+  impact: Automates repetitive pdf to acc sheet creation through APS.
+  badges: [Automation, Pilot]
+  kpis:
+    - { label: Manual Hours Saved /mo, value: "40+" }
+  demo:
+    type: iframe
+    url: "https://drive.google.com/file/d/1R3X012dJbFVPPZZ-bAqujaHN8FKLct9y/preview"
+  links:
+    - { label: Drive Video, url: "https://drive.google.com/file/d/1R3X012dJbFVPPZZ-bAqujaHN8FKLct9y/view?usp=drive_link" }
+
+- title: Revit Template
+  category: Standarization
+  status: Live
+  impact: Hermosillo‑branded template to accelerate modeling and ensure consistency.
+  badges: [Template, Training, live]
+  kpis:
+    - { label: Modeling Speed, value: "↑ 30–40%" }
+    - { label: QA Comments, value: "↓ 25%" }
+  demo:
+    type: iframe
+    url: "https://view.genially.com/68a488b15e2a63107586950b"
+  links:
+    - { label: RVT Template Video, url: "https://drive.google.com/file/d/1FTjwJW44LmE7SHj9YmKRnaTGzYRPISeT/view?usp=drive_link" }
+
+# ⬆️ Moved up one position (now above Parametric Budgeting)
+- title: Interactive 4D Simulation
+  category: Visualization
+  status: Demo
+  impact: Interactive showcasing tool for early stage visualization and construction 4D simulations
+  badges: [Simulation, Pilot]
+  kpis:
+    - { label: Simulation Prep Time, value: "2 - 3 Hrs" }
+  demo:
+    type: iframe
+    url: "https://drive.google.com/file/d/10e3VE5Q7ixGlwnTZeML-1pugYo-Tx95i/preview"
+  links:
+    - { label: I4DS Stream, url: "https://streams.vagon.io/streams/26e7fe3e-af5c-462b-8d21-556b93dc6665" }
+
+- title: Tilt-up Wall Automation
+  category: Automation
+  status: In Progress
+  impact: Automation of modelling and documentation of tilt up walls through dynamo
+  badges: [Automation, Demo]
+  kpis:
+    - { label: Modelling Time, value: "-90%" }
+    - { label: Documentation Time, value: "-90%" }
+  demo:
+    type: iframe
+    url: "https://drive.google.com/file/d/1pHODa5DlBjCpTTkfVN4WzBlYA8uIlr_i/preview"
+  links:
+    - { label: Tilt up Wall Automation, url: "https://drive.google.com/file/d/1pHODa5DlBjCpTTkfVN4WzBlYA8uIlr_i/view?usp=drive_link" }
+
+- title: Parametric Budgeting
+  category: Automation
+  status: In Progress
+  impact: Early tool that generates parametric project budgets automatically, anywhere with a few inputs.
+  badges: [Automation, Demo]
+  kpis:
+    - { label: Parametric Budget in less than..., value: "5 Minutes" }
+  demo:
+    type: iframe
+    url: "https://hmo-core-parametric-budget.streamlit.app/"
+  links:
+    - { label: Spec / Docs, url: "https://hmo-core-parametric-budget.streamlit.app/" }
+
+- title: QA Checklists (ACC‑linked)
+  category: Dashboards
+  status: Live
+  impact: Digital QA tied to plans with performance tracking per individual.
+  badges: [live, QA]
+  kpis:
+    - { label: Findings Resolved, value: "92%" }
+    - { label: Avg. Close Time, value: "↓ 35%" }
+  demo:
+    type: iframe
+    url: "https://hmo-core-qplans-checklist.streamlit.app/"
+  links:
+    - { label: QA Live Checklist, url: "https://hmo-core-qplans-checklist.streamlit.app/" }
+
+# 🆕 New AU item (iframe)
+- title: AU 2025
+  category: Event
+  status: Upcoming
+  demo:
+    type: iframe
+    url: "https://drive.google.com/file/d/1hmG8ZbYIjMVGEWxTxtVzfjOeRVtmeQt5/preview"
+  links:
+    - { label: AU Session, url: "https://conferences.autodesk.com/flow/autodesk/au2025/sessioncatalog/page/inperson/session/1744090156490001WazM" }
+
+- title: Revit Certified Professional Prep
+  category: Training
+  status: In Progress
+  impact: Builds internal capability; reduces onboarding time for new modelers.
+  badges: [Training]
+  kpis:
+    - { label: Certified Team Preparing, value: "8" }
+  demo:
+    type: iframe
+    url: "https://prezi.com/view/RkpSLVFNudor0O84sdI5/embed"
+  links:
+    - { label: Open in Prezi, url: "https://prezi.com/view/RkpSLVFNudor0O84sdI5/" }
+
+- title: Point Cloud (Trimble X9 – Demo)
+  category: Visualization
+  status: Demo
+  impact: Web-based point cloud viewer and processing through workstation with optional VR mode.
+  badges: [Point Cloud, WebGL, VR]
+  kpis:
+    - { label: Viewer, value: "Potree" }
+  demo:
+    type: iframe
+    url: "https://potree.org/potree/examples/vr_eclepens.html"
+  links:
+    - { label: Open Viewer, url: "https://potree.org/potree/examples/vr_eclepens.html" }
+
+
+
+
+# 🆕 Miscellaneous: bullets + optional media gallery
+- title: Miscellaneous
+  category: Other
+  status: Varying
+  demo:
+    type: bullets
+    layout: 3-columns   # or "2-columns"
+    items:
+      - Forms (Formatos inteligentes para Obra)
+      - Workstation (Rendering and 4D)
+      - Projected Plans on Surface (Smartboard, Project Mapping)
+      - Steel ton Management
+      - Comparative budget tables
+    media:
+      - "https://chatgpt.com/backend-api/public_content/enc/eyJpZCI6Im1fNjhhNzQ3YjU3ZTBjODE5MTlmN2VjMzE5OGM5NzBiOGU6ZmlsZV8wMDAwMDAwMGI2YTA2MjMwYWM1MjkzN2Y1YjBjNDhmOCIsInRzIjoiNDg3NzIwIiwicCI6InB5aSIsInNpZyI6IjUyZjZjMDdiNDUxNGU0Y2JhZmRjNWFlZjdlODRhNjZiODg3YTljM2IzODM4ZGI0MTQyZmE4NDNlMzRiMGY2ZTkiLCJ2IjoiMCIsImdpem1vX2lkIjpudWxsfQ=="
+      - "https://drive.google.com/file/d/1TIMqW-_ngBrkV36rMorguXQ19EEru9VB/preview"
+      - "https://drive.google.com/file/d/1Mc9kFf4v38lx09cU27Uwshx89zAd6PzV/preview"
