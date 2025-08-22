@@ -68,7 +68,8 @@
     type: iframe
     url: "https://streams.vagon.io/streams/hmo-core-i4ds"
   links:
-    - { label: I4DS Stream, url: "https://drive.google.com/file/d/10e3VE5Q7ixGlwnTZeML-1pugYo-Tx95i/preview" }
+    - { label: I4DS Stream, url: "https://streams.vagon.io/streams/hmo-core-i4ds" }
+    - { label: I4DS Video, url: "https://drive.google.com/file/d/10e3VE5Q7ixGlwnTZeML-1pugYo-Tx95i/preview" }
 
 - title: Tilt-up Wall Automation
   category: Automation
@@ -172,6 +173,7 @@
       - "https://drive.google.com/file/d/1GOGzLAZTae1O0B_UbcMfYOZebN-Vp0Qr/preview"
       - "https://drive.google.com/file/d/1NX7PtSHsOm3sdC2HKJ6eHdZ10y3vZ_CE/preview"
       - "https://drive.google.com/file/d/1i_POBUzEx4Nuz-eIUghGh9PmGrwFDV0F/preview"
+
 
 
 
