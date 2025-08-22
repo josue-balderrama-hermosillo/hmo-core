@@ -134,7 +134,7 @@
   links:
     - { label: Open in Prezi, url: "https://prezi.com/view/RkpSLVFNudor0O84sdI5/" }
 
-- title: Point Cloud (Trimble X9 – Proximity Parks SP MTY)
+- title: Point Cloud (Trimble X9 – Proximity Parks SP MTY - Video and Viewer)
   category: Visualization
   status: Demo
   impact: Demo project scan using the new Trimble X9 Scanner with Autodesk Recap Pro adn Autodesk Viewer.
@@ -172,6 +172,7 @@
       - "https://drive.google.com/file/d/1GOGzLAZTae1O0B_UbcMfYOZebN-Vp0Qr/preview"
       - "https://drive.google.com/file/d/1NX7PtSHsOm3sdC2HKJ6eHdZ10y3vZ_CE/preview"
       - "https://drive.google.com/file/d/1i_POBUzEx4Nuz-eIUghGh9PmGrwFDV0F/preview"
+
 
 
 
