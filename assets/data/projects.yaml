@@ -137,7 +137,7 @@
 - title: Point Cloud (Trimble X9 – Proximity Parks SP MTY)
   category: Visualization
   status: Demo
-  impact: Video of a demo project scan using the new Trimble X9 Scanner with Autodesk Recap Pro.
+  impact: Demo project scan using the new Trimble X9 Scanner with Autodesk Recap Pro adn Autodesk Viewer.
   badges: [Point Cloud, WebGL, VR]
   kpis:
     - { label: Viewer, value: "Recap Pro" }
@@ -145,9 +145,9 @@
     - { label: Scan Time, value: "3 HRS" }
   demo:
     type: iframe
-    url: "https://autode.sk/47Dwbi7"
+    url: "https://drive.google.com/file/d/1YyeUmMISDHRiuiFjAB6DXIsJGQwVgacn/preview"
   links:
-    - { label: Point Cloud Video, url: "https://drive.google.com/file/d/1YyeUmMISDHRiuiFjAB6DXIsJGQwVgacn/view?usp=sharing" }
+    - { label: Proximity Parks Point Cloud, url: "https://autode.sk/47Dwbi7" }
 
 
 
@@ -172,6 +172,7 @@
       - "https://drive.google.com/file/d/1GOGzLAZTae1O0B_UbcMfYOZebN-Vp0Qr/preview"
       - "https://drive.google.com/file/d/1NX7PtSHsOm3sdC2HKJ6eHdZ10y3vZ_CE/preview"
       - "https://drive.google.com/file/d/1i_POBUzEx4Nuz-eIUghGh9PmGrwFDV0F/preview"
+
 
 
 
