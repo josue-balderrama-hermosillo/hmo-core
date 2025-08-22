@@ -134,18 +134,20 @@
   links:
     - { label: Open in Prezi, url: "https://prezi.com/view/RkpSLVFNudor0O84sdI5/" }
 
-- title: Point Cloud (Trimble X9 – Demo) Example
+- title: Point Cloud (Trimble X9 – Proximity Parks SP MTY)
   category: Visualization
   status: Demo
-  impact: Web-based point cloud viewer and processing through workstation with optional VR mode.
+  impact: Video of a demo project scan using the new Trimble X9 Scanner with Autodesk Recap Pro.
   badges: [Point Cloud, WebGL, VR]
   kpis:
-    - { label: Viewer, value: "Potree - Example" }
+    - { label: Viewer, value: "Recap Pro" }
+    - { label: Time Save (Levantamiento), value: "more than 80%" }
+    - { label: Scan Time, value: "3 HRS" }
   demo:
     type: iframe
-    url: "https://potree.org/potree/examples/vr_eclepens.html"
+    url: "https://drive.google.com/file/d/1YyeUmMISDHRiuiFjAB6DXIsJGQwVgacn/preview"
   links:
-    - { label: Open Viewer, url: "https://potree.org/potree/examples/vr_eclepens.html" }
+    - { label: Point Cloud Video, url: "https://drive.google.com/file/d/1YyeUmMISDHRiuiFjAB6DXIsJGQwVgacn/view?usp=sharing" }
 
 
 
@@ -170,5 +172,6 @@
       - "https://drive.google.com/file/d/1GOGzLAZTae1O0B_UbcMfYOZebN-Vp0Qr/preview"
       - "https://drive.google.com/file/d/1NX7PtSHsOm3sdC2HKJ6eHdZ10y3vZ_CE/preview"
       - "https://drive.google.com/file/d/1i_POBUzEx4Nuz-eIUghGh9PmGrwFDV0F/preview"
+
 
 
