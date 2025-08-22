@@ -147,7 +147,7 @@
     type: iframe
     url: "https://drive.google.com/file/d/1YyeUmMISDHRiuiFjAB6DXIsJGQwVgacn/preview"
   links:
-    - { label: Proximity Parks Point Cloud, url: "https://autode.sk/47Dwbi7" }
+    - { label: Proximity Parks Point Cloud Viewer, url: "https://autode.sk/47Dwbi7" }
 
 
 
@@ -172,6 +172,7 @@
       - "https://drive.google.com/file/d/1GOGzLAZTae1O0B_UbcMfYOZebN-Vp0Qr/preview"
       - "https://drive.google.com/file/d/1NX7PtSHsOm3sdC2HKJ6eHdZ10y3vZ_CE/preview"
       - "https://drive.google.com/file/d/1i_POBUzEx4Nuz-eIUghGh9PmGrwFDV0F/preview"
+
 
 
 
