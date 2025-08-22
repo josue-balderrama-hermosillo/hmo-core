@@ -145,7 +145,7 @@
     - { label: Scan Time, value: "3 HRS" }
   demo:
     type: iframe
-    url: "https://drive.google.com/file/d/1YyeUmMISDHRiuiFjAB6DXIsJGQwVgacn/preview"
+    url: "https://autode.sk/47Dwbi7"
   links:
     - { label: Point Cloud Video, url: "https://drive.google.com/file/d/1YyeUmMISDHRiuiFjAB6DXIsJGQwVgacn/view?usp=sharing" }
 
@@ -172,6 +172,7 @@
       - "https://drive.google.com/file/d/1GOGzLAZTae1O0B_UbcMfYOZebN-Vp0Qr/preview"
       - "https://drive.google.com/file/d/1NX7PtSHsOm3sdC2HKJ6eHdZ10y3vZ_CE/preview"
       - "https://drive.google.com/file/d/1i_POBUzEx4Nuz-eIUghGh9PmGrwFDV0F/preview"
+
 
 
 
